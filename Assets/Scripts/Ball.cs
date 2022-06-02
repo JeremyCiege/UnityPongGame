@@ -11,12 +11,14 @@ public class Ball : MonoBehaviour
     public float speedY = 0.01f;
     public float speedX = 0.01f;
     public bool newGame;
+    private GameManager manager;
     private float playerVel = 0;
 
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        manager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
     }
 
@@ -47,7 +49,8 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (newGame)
+
+        if (manager.isNewGame())
         {
             new WaitForSeconds(10);
             rb.AddForce(vel, ForceMode2D.Impulse);
@@ -100,4 +103,6 @@ public class Ball : MonoBehaviour
         Debug.Log("yDirection: " + yDirection);
 
     }
+
+   
 }
