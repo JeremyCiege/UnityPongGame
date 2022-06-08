@@ -147,3 +147,4 @@ MonoBehaviour:
   speedY: 0
   speedX: 4
   newGame: 1
+  angleMultiplier: 3

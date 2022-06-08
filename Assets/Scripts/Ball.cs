@@ -13,6 +13,7 @@ public class Ball : MonoBehaviour
     public bool newGame;
     private GameManager manager;
     private float playerVel = 0;
+    public float angleMultiplier = 10;
 
 
     private void Awake()
@@ -52,7 +53,6 @@ public class Ball : MonoBehaviour
 
         if (manager.isNewGame())
         {
-            new WaitForSeconds(10);
             rb.AddForce(vel, ForceMode2D.Impulse);
             newGame = false;
         }
@@ -78,14 +78,13 @@ public class Ball : MonoBehaviour
             Debug.Log("Hit Wall");
 
             vel = new Vector2(speedX * direction, speedY * yDirection);
-            //rb.AddForce(vel, ForceMode2D.Impulse);
         }
         else
         {
             direction *= -1;
             Debug.Log("Hit Paddle");
 
-            playerVel = - collision.gameObject.GetComponent<Transform>().position.y + this.GetComponent<Transform>().position.y;
+            playerVel = (- collision.gameObject.GetComponent<Transform>().position.y + this.GetComponent<Transform>().position.y) * angleMultiplier;
             if (playerVel < 0)
             {
                 yDirection = -1;

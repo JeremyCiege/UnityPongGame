@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
 
     public int pointsP1 = 0;
     public int pointsP2 = 0;
-    public GameObject p1UI;
-    public GameObject p2UI;
+    public Text score1UI;
+    public Text score2UI;
     public GameObject ball;
     public GameObject gameBounds;
     private bool newGame;
@@ -47,10 +48,14 @@ public class GameManager : MonoBehaviour
         {
             
             StartCoroutine(ExampleCoroutine());
-            
+            volley = true;
             //wait a couple seconds and reset the pins
-            
+
         }
+
+
+
+
 
 
 
@@ -59,6 +64,7 @@ public class GameManager : MonoBehaviour
     public void scoreP1()
     {
         pointsP1++;
+        score1UI.text = pointsP1.ToString();
         StartCoroutine(wait(50));
         volley = false;
     }
@@ -66,6 +72,7 @@ public class GameManager : MonoBehaviour
     public void scoreP2()
     {
         pointsP2++;
+        score2UI.text = pointsP2.ToString();
         StartCoroutine(wait(50));
         volley = false;
     }
@@ -103,17 +110,17 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ExampleCoroutine()
     {
+        
+
         //Print the time of when the function is first called.
         Debug.Log("Started Coroutine at timestamp : " + Time.time);
 
         //yield on a new YieldInstruction that waits for 5 seconds.
         yield return new WaitForSeconds(1);
 
-        if (!volley)
-        {
+        
             gameball = Instantiate(ball);
-            volley = true;
-        }
+        
         
 
         //After we have waited 5 seconds print the time again.
